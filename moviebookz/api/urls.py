@@ -6,4 +6,7 @@ from . import views
 app_name = 'api'
 
 urlpatterns = [
+    url('login', views.user_login, name="login"),
+    url('logout', views.user_logout, name="logout"),
+    url('registration', views.user_registration, name="registration"),
 ]
