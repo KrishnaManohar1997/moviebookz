@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Our app is registered into the project
+    'api',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -105,7 +108,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# Asia - India Timezone for server
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
