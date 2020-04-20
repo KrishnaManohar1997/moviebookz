@@ -127,3 +127,6 @@ to Fire the tests
 ```
 python manage.py test
 ```
+
+## My Sample work for Django Web application integrated with the API
+![Django Movie Booking Demo](MovieBookz.gif)
