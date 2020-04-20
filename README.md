@@ -52,3 +52,9 @@ Shows, Theatre, Movie, City
 python manage.py makemigrations api
 python manage.py migrate
 ```
+
+To start the server use the following command
+
+```
+python manage.py runserver
+```

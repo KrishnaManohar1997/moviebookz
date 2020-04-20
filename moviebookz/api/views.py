@@ -1,4 +1,4 @@
-from django.http.response import JsonResponse
+from django.http.response import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, logout, login
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from rest_framework import status
 from .models import Theatre, Show, Movie, MovieTheatreShow, City
-from .serializer import MovieSerializer, TheatreSerializer, ShowSerializer, CitySerializer, MovieTheatreShowSerializer
+from .serializer import MovieSerializer, TheatreSerializer, ShowSerializer, CitySerializer
 
 # Since we have to add Cross-Site Request Forgery value everytime in Postman, just excluded
 # This is generally send from FORM while submitting data
@@ -45,14 +45,12 @@ def user_registration(request):
     else:
         return JsonResponse({"status": "Only POST method is allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
-# Helper method
-
 
 def get_theatre_shows_json(list_of_theatre_and_show):
-    theatre_shows = [{'theatre_id': id, 'show_id': [d['show_id'] for d in list_of_theatre_and_show if d['theatre_id'] == id]}
-                     for id in set(map(lambda d: d['theatre_id'], list_of_theatre_and_show))]
+    theatre_shows_map = [{'theatre_id': id, 'show_id': [d['show_id'] for d in list_of_theatre_and_show if d['theatre_id'] == id]}
+                         for id in set(map(lambda d: d['theatre_id'], list_of_theatre_and_show))]
     theatres_list = []
-    for theatre_show in theatre_shows:
+    for theatre_show in theatre_shows_map:
         theatre = Theatre.objects.filter(pk=theatre_show['theatre_id']).first()
         theatre_shows_json = TheatreSerializer(theatre).data
         shows_list_json = []
@@ -87,21 +85,15 @@ def available_shows_for_movie(request, movie_name, city_name):
 
 
 def all_movies(request):
-    movies = Movie.objects.all()
-    movie_list = []
-    for movie in movies:
-        movie_list.append(MovieSerializer(movie).data)
-    print(movie_list)
-    return JsonResponse(movie_list, safe=False)
+    movies = Movie.objects.all().values()
+    movie_list = list(movies)
+    return JsonResponse({"movies": movie_list})
 
 
 def all_cities(request):
-    cities = City.objects.all()
-    city_list = []
-    for city in cities:
-        city_list.append(CitySerializer(city).data)
-    print(city_list)
-    return JsonResponse(city_list, safe=False)
+    cities = City.objects.all().values()
+    city_list = list(cities)
+    return JsonResponse({"cities": city_list})
 
 
 def book_ticket(request, city_name, movie_name, theatre_name, show_name):
@@ -122,8 +114,6 @@ def book_ticket(request, city_name, movie_name, theatre_name, show_name):
                 return JsonResponse({"message": "You have successfully booked ticket for this show"})
             else:
                 return JsonResponse({"message": "There are no Seats available for this Show"})
-
-            return JsonResponse({"message": "Booking In process"})
         else:
             return JsonResponse({"message": "Booking failed as the selected preferences are incorrect/in valid"})
     return JsonResponse({"message": "Kindly login to continue booking for your favorite movie now"}, status=status.HTTP_401_UNAUTHORIZED)
@@ -158,7 +148,6 @@ def movies_in_city(request, city_name):
     if(requested_city):
         movies_in_requested_city = MovieTheatreShow.objects.filter(
             city=requested_city).values('movie_id').distinct()
-        print(movies_in_requested_city)
         movies_list_json = []
         for movie_in_requested_city in movies_in_requested_city:
             movies = Movie.objects.filter(
