@@ -4,10 +4,12 @@ API for a ticket booking system, where users can check the movies and book ticke
 ## Setting up the project
 ### Installing Django and other requirements
 Python 3.6.9 is the version used for creating this project
-open the project folder
+
+Open the project folder
 and install
 
 ```django``` and ```djangorestframework```
+directly by using the following command
 
 ```
 pip3 install -r requirements.txt
@@ -73,6 +75,49 @@ base_url/api/cities [GET]
 base_url/api/movies/<city_name> [GET]
 base_url/api/shows/<movie_name>/<city_name> [GET]
 base_url/api/book/<city_name>/<movie_name>/<theatre_name>/<show_name> [GET]  [PRIVATE]
+```
+## Example -> Running Server and Hitting an Endpoint
+
+```
+python manage.py runserver
+```
+
+### Checking Shows in the City of a movie
+
+http://127.0.0.1/shows/Avengers/Hyderabad
+
+Sample Response
+```
+{
+    "id": 1,
+    "name": "Avengers",
+    "rating": 8,
+    "theatres": [
+        {
+            "id": 1,
+            "name": "Inorbit",
+            "city": 1,
+            "shows": [
+                {
+                    "id": 1,
+                    "name": "Matinee",
+                    "start_time": "2020-04-20T12:19:50+05:30",
+                    "end_time": "2020-04-20T12:19:50+05:30",
+                    "total_seats": 10,
+                    "available_seats": 6
+                },
+                {
+                    "id": 2,
+                    "name": "Morning",
+                    "start_time": "2020-04-20T15:00:50+05:30",
+                    "end_time": "2020-04-20T18:19:50+05:30",
+                    "total_seats": 20,
+                    "available_seats": 20
+                }
+            ]
+        }
+    ]
+}
 ```
 
 ## Testing Django Unit-Tests
