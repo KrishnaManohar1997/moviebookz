@@ -3,13 +3,15 @@ API for a ticket booking system, where users can check the movies and book ticke
 
 ## Setting up the project
 ### Installing Django and other requirements
-
+Python 3.6.9 is the version used for creating this project
 open the project folder
 and install
 
 ```django``` and ```djangorestframework```
 
-
+```
+pip3 install -r requirements.txt
+```
 
 Creating the Django Project
 
