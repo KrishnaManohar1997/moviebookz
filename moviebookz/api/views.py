@@ -1,3 +1,4 @@
+import logging
 from django.http.response import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, logout, login
 from django.views.decorators.http import require_http_methods
@@ -8,6 +9,10 @@ from rest_framework import status
 from .models import Theatre, Show, Movie, MovieTheatreShow, City
 from .serializer import MovieSerializer, TheatreSerializer, ShowSerializer, CitySerializer
 
+# logger = logging.getLogger(__name__)
+logging.basicConfig(filename='api.log', 
+                    level=logging.DEBUG, 
+                    format='%(asctime)s - %(name)s - %(threadName)s -  %(levelname)s - %(message)s') 
 # Since we have to add Cross-Site Request Forgery value everytime in Postman, just excluded
 # This is generally send from FORM while submitting data
 @csrf_exempt
@@ -23,6 +28,7 @@ def user_login(request):
         else:
             return JsonResponse({'status': False, 'message': 'Account is disabled'})
     else:
+        logging.info("Invalid credentials provided with following username -> %s "%username)
         return JsonResponse({'status': False, 'message': 'Invalid Credentials, You can register from Registration endpoint'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
@@ -41,6 +47,7 @@ def user_registration(request):
         print(username, password, email)
         user = User.objects.create_user(username, email, password)
         user.save()
+        logging.info("New user created : %s"%username)
         return JsonResponse({"status": "Registration Successful"}, status=status.HTTP_201_CREATED)
     else:
         return JsonResponse({"status": "Only POST method is allowed"}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -81,6 +88,7 @@ def available_shows_for_movie(request, movie_name, city_name):
         return JsonResponse({"message": "%s is not registered" % city_name})
     elif requested_movie is None:
         return JsonResponse({"message": "%s movie is not available" % movie_name})
+    logging.error("Available Shows for %s movie in %s city cannot be served"%(movie_name,city_name))
     return JsonResponse({"message": "Sorry we are facing issues from our side"})
 
 
@@ -116,6 +124,7 @@ def book_ticket(request, city_name, movie_name, theatre_name, show_name):
                 return JsonResponse({"message": "There are no Seats available for this Show"})
         else:
             return JsonResponse({"message": "Booking failed as the selected preferences are incorrect/in valid"})
+    logging.warning("Unauthorized attempt to book ticket")
     return JsonResponse({"message": "Kindly login to continue booking for your favorite movie now"}, status=status.HTTP_401_UNAUTHORIZED)
 
 
@@ -156,4 +165,5 @@ def movies_in_city(request, city_name):
                 movies_list_json.append(MovieSerializer(movie).data)
         return JsonResponse(movies_list_json, safe=False)
     else:
+        logging.info("Users requested for movies in city %s"%city_name)
         return JsonResponse({"message": "Currently %s is not registered in our cities" % city_name})

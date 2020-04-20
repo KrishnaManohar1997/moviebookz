@@ -1,0 +1,24 @@
+2020-04-21 00:40:58,654 - django.request - Thread-2 -  WARNING - Not Found: /
+2020-04-21 00:40:59,140 - django.request - Thread-2 -  WARNING - Not Found: /favicon.ico
+2020-04-21 00:41:13,697 - root - Thread-2 -  WARNING - Unauthorized attempt to book ticket
+2020-04-21 00:41:13,697 - django.request - Thread-2 -  WARNING - Unauthorized: /api/book/HyderAbad/avengers/pvr/matinee
+2020-04-21 00:41:53,461 - root - Thread-2 -  INFO - Users requested for movies in city Delhi
+2020-04-21 00:45:14,607 - django.utils.autoreload - MainThread -  INFO - D:\moviebookz\moviebookz\moviebookz\api\views.py changed, reloading.
+2020-04-21 00:45:59,972 - django.request - Thread-1 -  ERROR - Internal Server Error: /api/login
+Traceback (most recent call last):
+  File "C:\Users\manohar.k\.conda\envs\UniversitySystem\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\manohar.k\.conda\envs\UniversitySystem\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\manohar.k\.conda\envs\UniversitySystem\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\manohar.k\.conda\envs\UniversitySystem\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\manohar.k\.conda\envs\UniversitySystem\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "D:\moviebookz\moviebookz\moviebookz\api\views.py", line 31, in user_login
+    logging.info("Invalid credentials provided with following username -> %"%username)
+ValueError: incomplete format
+2020-04-21 00:46:23,516 - django.utils.autoreload - MainThread -  INFO - D:\moviebookz\moviebookz\moviebookz\api\views.py changed, reloading.
+2020-04-21 00:46:27,124 - root - Thread-1 -  INFO - Invalid credentials provided with following username -> cawstudio 
+2020-04-21 00:46:27,124 - django.request - Thread-1 -  WARNING - Unauthorized: /api/login
