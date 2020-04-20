@@ -1,6 +1,10 @@
 # Moviebookz
 API for a ticket booking system, where users can check the movies and book tickets
 
+## With a **workflow pipeline** added for the project
+check the stats from here
+https://github.com/KrishnaManohar1997/moviebookz/runs/602961577?check_suite_focus=true
+
 ## Setting up the project
 ### Installing Django and other requirements
 Python 3.6.9 is the version used for creating this project
