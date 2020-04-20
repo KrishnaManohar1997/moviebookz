@@ -82,7 +82,7 @@ base_url/api/book/<city_name>/<movie_name>/<theatre_name>/<show_name> [GET]  [PR
 python manage.py runserver
 ```
 
-### Checking Shows in the City of a movie
+### Checking Shows for a movie in the City
 
 http://127.0.0.1/shows/Avengers/Hyderabad
 
@@ -130,3 +130,7 @@ python manage.py test
 
 ## My Sample work for Django Web application integrated with the API
 ![Django Movie Booking Demo](MovieBookz.gif)
+
+## Added Logging to check invalid response or requests from Users
+api.log file is being attached for that
+Check that file, to understand how the logs are being stored
