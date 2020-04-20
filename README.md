@@ -58,3 +58,25 @@ To start the server use the following command
 ```
 python manage.py runserver
 ```
+
+## Endpoints
+
+Movie Bookz API provides the following endpoints
+```
+base_url/api/login [POST] -> {username : username, password : password}
+base_url/api/logout [GET] [PRIVATE]
+base_url/api/registration [POST] -> {username : username, password : password, email : email}
+base_url/api/movies [GET]
+base_url/api/cities [GET]
+base_url/api/movies/<city_name> [GET]
+base_url/api/shows/<movie_name>/<city_name> [GET]
+base_url/api/book/<city_name>/<movie_name>/<theatre_name>/<show_name> [GET]  [PRIVATE]
+```
+
+## Testing Django Unit-Tests
+open the App directory, where manage.py exists and run the following command
+to Fire the tests
+
+```
+python manage.py test
+```

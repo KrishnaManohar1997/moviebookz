@@ -1,0 +1,91 @@
+// http://127.0.0.1:8000/api/movies
+[
+    {
+        "movies": [
+            {
+                "id": 1,
+                "name": "Avengers",
+                "rating": 8
+            },
+            {
+                "id": 2,
+                "name": "Black Widow",
+                "rating": 7
+            },
+            {
+                "id": 3,
+                "name": "Wonder Woman",
+                "rating": 7
+            }
+        ]
+    }
+]
+// http://127.0.0.1:8000/api/cities
+[
+    {
+        "cities": [
+            {
+                "id": 1,
+                "name": "Hyderabad"
+            },
+            {
+                "id": 2,
+                "name": "Mumbai"
+            }
+        ]
+    }
+]
+// http://127.0.0.1:8000/api/movies/hyderabad
+[
+    {
+        "id": 1,
+        "name": "Avengers",
+        "rating": 8
+    },
+    {
+        "id": 2,
+        "name": "Black Widow",
+        "rating": 7
+    }
+]
+// http://127.0.0.1:8000/api/shows/Wonder Woman/Mumbai
+{
+    "id": 3,
+    "name": "Wonder Woman",
+    "rating": 7,
+    "theatres": [
+        {
+            "id": 3,
+            "name": "Madden",
+            "city": 2,
+            "shows": [
+                {
+                    "id": 1,
+                    "name": "Matinee",
+                    "start_time": "2020-04-20T12:19:50+05:30",
+                    "end_time": "2020-04-20T12:19:50+05:30",
+                    "total_seats": 10,
+                    "available_seats": 7
+                }
+            ]
+        }
+    ]
+}
+// http://127.0.0.1:8000/api/registration
+{
+    "status": "Registration Successful"
+}
+//  http://127.0.0.1:8000/api/login
+{
+    "status": true,
+    "message": "Login Successful"
+}
+// http://127.0.0.1:8000/api/book/Mumbai/Wonder Woman/Madden/matinee
+{
+    "message": "You have successfully booked ticket for this show"
+}
+// http://127.0.0.1:8000/api/logout
+{
+    "status": "disconnected",
+    "message": "You have been logged out successfully"
+}
