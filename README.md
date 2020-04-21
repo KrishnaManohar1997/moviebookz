@@ -71,6 +71,7 @@ python manage.py runserver
 
 Movie Bookz API provides the following endpoints
 ```
+base_url = http://127.0.0.1
 base_url/api/login [POST] -> {username : username, password : password}
 base_url/api/logout [GET] [PRIVATE]
 base_url/api/registration [POST] -> {username : username, password : password, email : email}
@@ -88,7 +89,7 @@ python manage.py runserver
 
 ### Checking Shows for a movie in the City
 
-http://127.0.0.1/shows/Avengers/Hyderabad
+http://127.0.0.1/api/shows/Avengers/Hyderabad
 
 Sample Response
 ```
